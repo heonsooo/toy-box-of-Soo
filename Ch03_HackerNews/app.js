@@ -5,6 +5,7 @@ const NEWS_URL = "https://api.hnpwa.com/v0/news/1.json";
 const CONTENT_URL = "https://api.hnpwa.com/v0/item/@id.json";
 const store = {
   currentPage: 1,
+  feeds: [],
 };
 
 function getData(url) {
@@ -18,7 +19,7 @@ function newsFeed() {
   const newsFeed = getData(NEWS_URL);
   const newsList = [];
   let template = `
-  <div class="bg-gray-600 min-h-screen">
+  <div class="bg-gray-600 min-h-screen" style="width:600px; margin:auto;">
     <div class="bg-white text-xl">
       <div class="mx-auto px-4">
         <div class="flex justify-between items-center py-6">
@@ -36,13 +37,13 @@ function newsFeed() {
         </div>
       </div>
     </div>
-    <div class="p-4 text-2xl text-gray-700">{{__news_feed__}}</div>
+    <div class="p-4 text-2xl text-gray-700" >{{__news_feed__}}</div>
   </div>;
   `;
 
   for (let i = (store.currentPage - 1) * 10; i < store.currentPage * 10; i++) {
     newsList.push(`
-  <div class="p-6 bg-white mt-6 rounded-lg shadow-md transition-colors duration-500 hover:bg-green-100">
+  <div class="p-6 bg-white mt-6 rounded-lg shadow-md transition-colors duration-500 hover:bg-green-100" >
     <div class="flex">
       <div class="flex-auto">
         <a href="#/show/${newsFeed[i].id}">${newsFeed[i].title}</a>
@@ -76,7 +77,7 @@ function newsDetail() {
   const id = location.hash.substring(7);
   const newsContent = getData(CONTENT_URL.replace("@id", id));
   let template = `
-<div class="bg-gray-600 min-h-screen pb-8">
+<div class="bg-gray-600 min-h-screen pb-8" style="width:600px; margin:auto;">
   <div class="bg-white text-xl">
     <div class="mx-auto px-4">
       <div class="flex justify-between items-center py-6">
@@ -107,7 +108,7 @@ function newsDetail() {
       commentString.push(`<div style="padding-left : ${
         40 * call
       }px" class="mt-4">
-  <div class="text-gray-400">
+  <div class="text-gray-400" style="width:600px;>
     <i class="fa fa-sort-up mr-2"></i>
     <strong>${comments[i].user}</strong>${comments[i].time_ago}
   </div>
