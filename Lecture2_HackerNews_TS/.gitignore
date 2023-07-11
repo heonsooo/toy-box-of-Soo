@@ -1,0 +1,10 @@
+# Dependency directories
+# 참고 : 네이버
+node_modules
+
+
+# parcel-bundler cache (https://parceljs.org/)
+# 참고 : 캡틴판교
+.cache
+
+dist/
