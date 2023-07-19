@@ -37,11 +37,56 @@ JS 기반 해커뉴스 프로젝트를 TS로 포팅하는 프로젝트.
 2. 인터페이스 
 두 가지 방법은 문법적으로 아주 조금 차이가 있다.
 제공 되는 기능은 거의 유사하며, 작은 몇 가지 차이가 있다.
+
+-> 선언부 지정
+-> 타입 결합/조합 방법
+
 ## 타입 알리아스를 사용한 타입 지정
-- 
+1. type 변수명 = { ... } 으로 지정
+```typescript
+type milk = {
+  a : number
+}
+```
+
+2. 타입 결합/조합 방법 : & 사용
+```typescript
+type milk = {
+  a : number
+}
+type coffee =  milk & {
+  // milk를 확장해서 새로운 타입 
+  b : number
+}
+```
 
 ## 인터페이스를 사용한 타입 지정
+- 수학 연산보다는, 글로써 표현하는 듯한 기법으로 인해, 확장되는 형식의 타입들은 인터페이스를 선호한다.
+1. interface 변수명 {} 으로 지정
+```typescript
+interface milk {
+  a : number
+}
+```
+2. 타입 결합/조합 방법 : extends 사용
+```typescript
+interface milk {
+  a : number
+}
+interface coffee extends milk {
+  // milk를 확장해서 새로운 타입 
+  b : number
+}
+```
 
+3. 지시어를 통해 타입에 대한 설명을 덧붙일 수 있다.
+- 단단하고 안전한 코드 작성 가능해짐.
+```typescript
+interface student {
+  readonly id : string
+}
+// student 객체의 id는 readonly 지시어를 통해 수정 불가능하도록 지정 가능.
+```
 
 ## [TS특징]
 - 타입스크립트는 트랜스 파일러이기 때문에 브라우저에서 실행시키기 위해서는 자바스크립트로 변환 시켜야 한다. 
@@ -49,6 +94,9 @@ JS 기반 해커뉴스 프로젝트를 TS로 포팅하는 프로젝트.
 - 타입스크립트에서 자바스크립트로 변환하는 과정은 컴파일이라고 부르고 tsconfig.json파일에서 설정하여 사용한다.
 - tsconfig.json은 옵션이 굉장히 많다.
   - 참고 : https://www.typescriptlang.org/ko/docs/handbook/tsconfig-json.html 
+- 타입에 대한 설명을 풍성하게 많이 해 놓을 수록 코딩을 하며 실수할 수 있는 부분을 미연에 방지하여 단단하고 안전한 코드를 작성할 수 있다.
+- 처음 타입을 작성할 때 많은 시간을 투자하면, 이후 실제 코드 작성에 있어서는 고민을 줄여 시간을 단축시킬 수 있다.
+  -> 수정해도 되는지/안되는지 고민하는 시간을 절약할 수 있기 때문에!
 
 
 [Memo]

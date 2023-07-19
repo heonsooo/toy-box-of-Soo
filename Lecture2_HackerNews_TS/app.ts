@@ -1,33 +1,38 @@
-type Store = {
+// 타입 알리아스 -> 인터페이스
+// type Store = {
+//   currentPage: number;
+//   feeds: NewsFeed[]; // NewsFeed 유형의 배열
+// };
+interface Store {
   currentPage: number;
   feeds: NewsFeed[]; // NewsFeed 유형의 배열
-};
+}
 
 // 타입 알리아스로 아래  NewsFeed, NewsDetail, NewsComment의 공통 요소(중복 된 값) 합치기
-type News = {
-  id: string;
+interface News {
+  readonly id: string;
   time_ago: string;
   title: string;
   url: string;
   user: string;
   content: string;
-};
+}
 
 // 공통요소를 위로 빼고 News &을 붙여서 News 객체도 붙임
-type NewsFeed = News & {
+interface NewsFeed extends News {
   comments_count: number;
   points: number;
   read?: boolean; // option
-};
+}
 
-type NewsDetail = News & {
+interface NewsDetail extends News {
   comments: NewsComment[];
-};
+}
 
-type NewsComment = News & {
+interface NewsComment extends News {
   comments: NewsComment[];
   level: number;
-};
+}
 
 const container: HTMLElement | null = document.getElementById("root");
 const ajax: XMLHttpRequest = new XMLHttpRequest();
