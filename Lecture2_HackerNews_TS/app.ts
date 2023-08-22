@@ -60,35 +60,35 @@ const store: Store = {
 // getData 함수를 공통 요소로 클래스(이름 : API)로 생성
 // 클래스는 최초의 초기화 되는 과정이 필요하며, 생성자 함수 constructor()를 사용하여 초기화한다.
 // 클래스에서 필요한 요소들 생성자에 정의
-class Api {
-  url: string;
-  ajax: XMLHttpRequest;
+// class Api {
+//   url: string;
+//   ajax: XMLHttpRequest;
 
-  constructor(url: string) {
-    this.url = url;
-    this.ajax = new XMLHttpRequest();
-  }
+//   constructor(url: string) {
+//     this.url = url;
+//     this.ajax = new XMLHttpRequest();
+//   }
 
-  // protected 지시어를 사용해서 외부에서 해당 함수 사용하지 못하도록 방어
-  protected getRequest<AjaxResponse>(): AjaxResponse {
-    this.ajax.open("GET", this.url, false);
-    this.ajax.send();
-    return JSON.parse(this.ajax.response);
-  }
-}
+//   // protected 지시어를 사용해서 외부에서 해당 함수 사용하지 못하도록 방어
+//   protected getRequest<AjaxResponse>(): AjaxResponse {
+//     this.ajax.open("GET", this.url, false);
+//     this.ajax.send();
+//     return JSON.parse(this.ajax.response);
+//   }
+// }
 
 // Api 클래스를 확장하는 NewsFeedApi 클래스 : Api가 가지고 있는 속성, 특성 모두 가짐.
-class NewsFeedApi extends Api {
-  getData(): NewsFeed[] {
-    return this.getRequest<NewsFeed[]>();
-  }
-}
+// class NewsFeedApi extends Api {
+//   getData(): NewsFeed[] {
+//     return this.getRequest<NewsFeed[]>();
+//   }
+// }
 
-class NewsDetailApi extends Api {
-  getData(): NewsDetail {
-    return this.getRequest<NewsDetail>();
-  }
-}
+// class NewsDetailApi extends Api {
+//   getData(): NewsDetail {
+//     return this.getRequest<NewsDetail>();
+//   }
+// }
 
 // function getData<AjaxResponse>(url: string): AjaxResponse {
 //   ajax.open("GET", url, false);
@@ -98,6 +98,49 @@ class NewsDetailApi extends Api {
 
 //   return JSON.parse(ajax.response);
 // }
+
+// ============================ 믹스인
+// targetClass로 제공된 클래스에 baseClasses라는 n개의 클래스 기능들을 합성(다중 상속)시킨다.
+function applyApiMixins(targetClass: any, baseClasses: any[]): void {
+  baseClasses.forEach((baseCalss) => {
+    Object.getOwnPropertyNames(baseCalss.prototype).forEach((name) => {
+      const descriptor = Object.getOwnPropertyDescriptor(
+        baseCalss.prototype,
+        name
+      );
+      if (descriptor) {
+        Object.defineProperty(targetClass.prototype, name, descriptor);
+      }
+    });
+  });
+}
+
+class Api {
+  // protected 지시어를 사용해서 외부에서 해당 함수 사용하지 못하도록 방어
+  getRequest<AjaxResponse>(url: string): AjaxResponse {
+    const ajax = new XMLHttpRequest();
+    ajax.open("GET", url, false);
+    ajax.send();
+    return JSON.parse(ajax.response);
+  }
+}
+interface NewsFeedApi extends Api {}
+interface NewsDetailApi extends Api {}
+
+class NewsFeedApi {
+  getData(): NewsFeed[] {
+    return this.getRequest<NewsFeed[]>(NEWS_URL);
+  }
+}
+
+class NewsDetailApi {
+  getData(id: string): NewsDetail {
+    return this.getRequest<NewsDetail>(CONTENT_URL.replace("@id", id));
+  }
+}
+
+applyApiMixins(NewsFeedApi, [Api]);
+applyApiMixins(NewsDetailApi, [Api]);
 
 function makeFeeds(feeds: NewsFeed[]): NewsFeed[] {
   for (let i = 0; i < feeds.length; i++) {
@@ -114,10 +157,10 @@ function updateview(html: string): void {
 }
 
 function newsFeed(): void {
-  const api = new NewsFeedApi(NEWS_URL);
+  let api = new NewsFeedApi();
   let newsFeed: NewsFeed[] = store.feeds;
-  const newsList = [];
-  let template = `
+  const newsList: string[] = [];
+  let template: string = `
   <div class="bg-gray-600 min-h-screen" style="width:600px; margin:auto;">
     <div class="bg-white text-xl">
       <div class="mx-auto px-4">
@@ -183,11 +226,11 @@ function newsFeed(): void {
   updateview(template);
 }
 
-function newsDetail() {
+function newsDetail(): void {
   const id = location.hash.substring(7);
   // const newsContent = getData<NewsDetail>(CONTENT_URL.replace("@id", id));
-  const api = new NewsDetailApi(CONTENT_URL.replace("@id", id));
-  const newsContent = api.getData();
+  const api = new NewsDetailApi();
+  const newsDetail: NewsDetail = api.getData(id);
 
   let template = `
 <div class="bg-gray-600 min-h-screen pb-8" style="width:600px; margin:auto;">
@@ -206,8 +249,8 @@ function newsDetail() {
     </div>
   </div>
   <div class="h-full border rounded-xl bg-white m-6 p-4">
-    <h2>${newsContent.title}</h2>
-    <div class="text-gray-400 h-20">${newsContent.content}</div>
+    <h2>${newsDetail.title}</h2>
+    <div class="text-gray-400 h-20">${newsDetail.content}</div>
     {{__comments__}}
   </div>
 </div>;`;
@@ -220,7 +263,7 @@ function newsDetail() {
   }
 
   updateview(
-    template.replace("{{__comments__}}", makeComment(newsContent.comments))
+    template.replace("{{__comments__}}", makeComment(newsDetail.comments))
   );
   // if (container) {
   //   container.innerHTML = template.replace(
