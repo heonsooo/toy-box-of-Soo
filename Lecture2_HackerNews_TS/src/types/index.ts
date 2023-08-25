@@ -9,9 +9,21 @@ export interface Store {
   currentPage: number;
 }
 
+export interface NewsStore {
+  getAllFeeds: () => NewsFeed[];
+  getFeed: (position: number) => NewsFeed;
+  setFeeds: (feeds: NewsFeed[]) => void;
+  makeRead: (id: number) => void;
+  hasFeeds: boolean;
+  currentPage: number;
+  numberOfFeed: number;
+  nextPage: number;
+  prevPage: number;
+}
+
 // 타입 알리아스로 아래  NewsFeed, NewsDetail, NewsComment의 공통 요소(중복 된 값) 합치기
 export interface News {
-  readonly id: string;
+  readonly id: number;
   readonly time_ago: string;
   readonly title: string;
   readonly url: string;

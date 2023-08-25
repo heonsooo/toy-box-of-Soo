@@ -1,34 +1,19 @@
+import Store from "./store";
 import Router from "./core/router";
-import { Store } from "./types";
-
-// 폴더 index에 export default 로 선언하여 폴더 하위 파일에 대해 신경쓰지 않고 import 해올 수 있는 방법
-// import  from "./src/page/news-feed-view";
-// import  from "./src/page/news-detail-view";
 import { NewsFeedView, NewsDetailView } from "./page";
 
-const store: Store = {
-  currentPage: 1,
-  feeds: [],
-};
-
-// 좋은 방법은 아니지만 전역 객체로 선언하여 store를 다른 파일에서도 사용하기
-// 추후 개선할 예정
-declare global {
-  interface Window {
-    store: Store;
-  }
-}
-window.store = store;
-
+const store = new Store();
 const router: Router = new Router();
-const newsFeedView = new NewsFeedView("root");
-const newsDetailView = new NewsDetailView("root");
+const newsFeedView = new NewsFeedView("root", store);
+const newsDetailView = new NewsDetailView("root", store);
 
 router.setDefaultPage(newsFeedView);
 router.addRoutePath("/page/", newsFeedView);
 router.addRoutePath("/show/", newsDetailView);
 
 router.route();
+
+//  ================================================================================================
 
 // const container: HTMLElement | null = document.getElementById("root");
 // const ajax: XMLHttpRequest = new XMLHttpRequest();
