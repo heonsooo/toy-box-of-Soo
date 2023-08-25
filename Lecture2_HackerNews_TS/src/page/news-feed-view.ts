@@ -36,30 +36,13 @@ export default class NewsFeedView extends View {
     this.api = new NewsFeedApi(NEWS_URL);
     // this.feeds = store.feeds;
   }
-  render = (page: string = "1"): void => {
+  render = async (page: string = "1"): Promise<void> => {
     this.store.currentPage = Number(page);
 
     if (!this.store.hasFeeds) {
-      this.api.getDataWithPromise((feeds: NewsFeed[]) => {
-        this.store.setFeeds(feeds);
-        this.renderVeiw();
-      });
+      this.store.setFeeds(await this.api.getData());
     }
 
-    this.renderVeiw();
-
-    // template = template.replace("{{__news_feed__}}", this.getHtml ());
-    // template = template.replace(
-    //   "{{__prev_page__}}",
-    //   String(store.currentPage > 1 ? store.currentPage - 1 : 1)
-    // );
-    // template = template.replace(
-    //   "{{__next_page__}}",
-    //   String(store.currentPage + 1)
-    // );
-  };
-
-  renderVeiw = () => {
     for (
       let i = (this.store.currentPage - 1) * 10;
       i < this.store.currentPage * 10;
