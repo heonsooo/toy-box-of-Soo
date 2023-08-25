@@ -148,6 +148,7 @@ interface student {
 - 속성 접근자
   - private : 외부/자식에서도 접근 불가 
   - protected : 외부에서 접근 불가 / 자식에서 접근 가능 
+  - 
 ```javascript
 class MakeParentsClass{
   testString : string ;   // #2  변수 선언 후 초기화
@@ -162,8 +163,28 @@ class MakeChildClass extends MakeParentsClass{
   }
 
 }
-
 ```
+
+
+## CH04_07 파일의 분리, 더욱 성잘할 앱을 위한 준비
+- 코드를 분리해서 깔끔하고 관리하기 쉬운 형태의 프로젝트를 만드는 방법 
+  - 구조를 개선하기 위해 디렉토리를 만들고, 분산시키고 배치시킨다.
+  - 디렉토리 생성 : src 
+  - app.ts파일에는 다양한 역할의 코드들이 모여있다.
+    -> [공통코드] view, router, api 코드    : src/core 폴더
+    -> [UI] 페이지와 관련된 클래스           : src/page
+    -> [인터페이스]                         : src/types
+-  코드들이 여러 파일에 나누어져 분산되었을 때는 코드를 불러야 사용할 수 있음.
+   -> 자바스크립트의 module 스펙을 이용해 해당 기능 수행.
+   -> module 스펙은 import/export 구문 
+    -> import 다른 파일에 있는 코드를 가져오는 문법
+    -> export 해당 파일의 코드를 import 해갈 수 있게 허락해주는 문법
+  ->  class 지시어 앞에 export를 붙이면 외부에서 import 해갈 수 있다.
+  해당 파일에서 1개 / 여러개를 export할 수 있다.
+  -> export default : default를 붙여주면, 기본으로 가져가겠다는 의미. 여러 export 중에 하나만 default로 지정해서도 사용 가능하다.
+
+
+
 
 [Memo]
 - 개발에 있어 코드를 읽기 쉽게 작성하기 위해서 **일관성**을 유지하는 것이 중요한 가치 중 하나이다.
