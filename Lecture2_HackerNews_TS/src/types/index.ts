@@ -4,11 +4,6 @@ import View from "../core/view";
 //   currentPage: number;
 //   feeds: NewsFeed[]; // NewsFeed 유형의 배열
 // };
-export interface Store {
-  feeds: NewsFeed[]; // NewsFeed 유형의 배열
-  currentPage: number;
-}
-
 export interface NewsStore {
   getAllFeeds: () => NewsFeed[];
   getFeed: (position: number) => NewsFeed;
@@ -50,4 +45,5 @@ export interface NewsComment extends News {
 export interface RouteInfo {
   path: string;
   page: View;
+  params: RegExp | null;
 }

@@ -3,6 +3,7 @@ import { NewsFeed, NewsStore } from "./types";
 export default class Store implements NewsStore {
   private feeds: NewsFeed[];
   private _currentPage: number;
+
   constructor() {
     this.feeds = [];
     this._currentPage = 1;

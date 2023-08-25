@@ -2,9 +2,8 @@ import View from "../core/view";
 import { NewsFeedApi } from "./../core/api";
 import { NewsFeed, NewsStore } from "../types";
 import { NEWS_URL } from "../config";
-import Store from "../store";
 
-const template: string = `
+const template = `
   <div class="bg-gray-600 min-h-screen" style="width:600px; margin:auto;">
     <div class="bg-white text-xl">
       <div class="mx-auto px-4">
@@ -36,15 +35,31 @@ export default class NewsFeedView extends View {
     this.store = store;
     this.api = new NewsFeedApi(NEWS_URL);
     // this.feeds = store.feeds;
+  }
+  render = (page: string = "1"): void => {
+    this.store.currentPage = Number(page);
 
     if (!this.store.hasFeeds) {
-      // 클래스 인스턴스를 사용할 때 깔끔한 코드로 변환
-      this.store.setFeeds(this.api.getData());
+      this.api.getDataWithPromise((feeds: NewsFeed[]) => {
+        this.store.setFeeds(feeds);
+        this.renderVeiw();
+      });
     }
-  }
-  render(): void {
-    this.store.currentPage = Number(location.hash.slice(7, 8) || 1);
 
+    this.renderVeiw();
+
+    // template = template.replace("{{__news_feed__}}", this.getHtml ());
+    // template = template.replace(
+    //   "{{__prev_page__}}",
+    //   String(store.currentPage > 1 ? store.currentPage - 1 : 1)
+    // );
+    // template = template.replace(
+    //   "{{__next_page__}}",
+    //   String(store.currentPage + 1)
+    // );
+  };
+
+  renderVeiw = () => {
     for (
       let i = (this.store.currentPage - 1) * 10;
       i < this.store.currentPage * 10;
@@ -52,6 +67,7 @@ export default class NewsFeedView extends View {
     ) {
       const { id, title, comments_count, user, points, time_ago, read } =
         this.store.getFeed(i);
+
       this.addHtml(`
   <div class="p-6 ${
     read ? "bg-red-500" : "bg-white"
@@ -75,18 +91,9 @@ export default class NewsFeedView extends View {
     `);
     }
 
-    // template = template.replace("{{__news_feed__}}", this.getHtml ());
     this.setTemplateData("news_feed", this.getHtml());
-    // template = template.replace(
-    //   "{{__prev_page__}}",
-    //   String(store.currentPage > 1 ? store.currentPage - 1 : 1)
-    // );
     this.setTemplateData("prev_page", String(this.store.prevPage));
-    // template = template.replace(
-    //   "{{__next_page__}}",
-    //   String(store.currentPage + 1)
-    // );
     this.setTemplateData("next_page", String(this.store.nextPage));
     this.updateview();
-  }
+  };
 }
