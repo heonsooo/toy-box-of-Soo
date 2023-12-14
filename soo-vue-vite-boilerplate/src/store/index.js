@@ -1,14 +1,29 @@
 import { createStore } from "vuex";
 
-const store = createStore({
-  state: {
-    count: 0,
-  },
-  mutations: {
-    increment(state) {
-      state.count++;
-    },
-  },
+export default createStore({
+  // namespaced: true,
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
+  modules: {},
 });
 
-export default store;
+// import { createStore } from "vuex";
+
+// const store = createStore({
+//   state: {
+//     // Define your state properties here
+//   },
+//   mutations: {
+//     // Define your mutations here
+//   },
+//   actions: {
+//     // Define your actions here
+//   },
+//   getters: {
+//     // Define your getters here
+//   },
+// });
+
+// export default store;
