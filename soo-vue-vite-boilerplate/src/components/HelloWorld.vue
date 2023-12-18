@@ -9,7 +9,7 @@ const count = ref(0);
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1 class="text-3xl font-bold underline">{{ msg }}</h1>
 
   <div class="card">
     <p>with. 아아덕후</p>
