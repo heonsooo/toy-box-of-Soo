@@ -10,6 +10,9 @@ export default {
     };
   },
   methods: {
+    onClickMoveHome() {
+      this.$router.push("/");
+    },
     onClickMovePageA() {
       this.$router.push({ name: "A" });
     },
@@ -27,6 +30,9 @@ export default {
     <p>
       Main Page
       <span>
+        <button type="button" @click="onClickMoveHome">Home</button>
+      </span>
+      <span>
         <button type="button" @click="onClickMovePageA">pageA</button>
       </span>
       <span>
@@ -37,14 +43,11 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style>
 .main-border {
-  width: 600px;
-  border: 1px solid #000;
+  width: 80%;
+  border: 2px solid #000;
   padding: 10px;
   margin: 10px;
-}
-.read-the-docs {
-  color: #888;
 }
 </style>
