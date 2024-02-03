@@ -4,9 +4,31 @@ import module_dolce from "./latte/dolce.js";
 
 export default createStore({
   namespaced: true,
-  state: {},
+  state: {
+    COMMON_COFFEE: [
+      {
+        name: "Iced Americano",
+        price: 3.5,
+        count: 0,
+        description: "Two shot of espresso with cold water",
+      },
+      {
+        name: "dolce latte",
+        price: 4.5,
+        count: 0,
+        description: "A single shot of espresso with hot milk and foam",
+      },
+    ],
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    COMMON_incrementCoffeeCount(state, index) {
+      state.COMMON_COFFEE[index].count++;
+    },
+    COMMON_decrementCoffeeCount(state, index) {
+      state.COMMON_COFFEE[index].count--;
+    },
+  },
   actions: {},
   modules: {
     module_americano,
@@ -30,5 +52,3 @@ export default createStore({
 //     // Define your getters here
 //   },
 // });
-
-// export default store;
