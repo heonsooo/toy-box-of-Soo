@@ -1,12 +1,17 @@
 import { createStore } from "vuex";
+import module_americano from "./espresso/americano.js";
+import module_dolce from "./latte/dolce.js";
 
 export default createStore({
-  // namespaced: true,
+  namespaced: true,
   state: {},
   getters: {},
   mutations: {},
   actions: {},
-  modules: {},
+  modules: {
+    module_americano,
+    module_dolce,
+  },
 });
 
 // import { createStore } from "vuex";
