@@ -8,13 +8,11 @@ export default createStore({
     COMMON_COFFEE: [
       {
         name: "Iced Americano",
-        price: 3.5,
         count: 0,
         description: "Two shot of espresso with cold water",
       },
       {
         name: "dolce latte",
-        price: 4.5,
         count: 0,
         description: "A single shot of espresso with hot milk and foam",
       },
