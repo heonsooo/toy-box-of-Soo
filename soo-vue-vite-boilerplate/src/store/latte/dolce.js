@@ -7,7 +7,12 @@ const state = {
   },
 };
 const mutations = {
-  // Define your mutations here
+  incrementDolceLattePrice(state) {
+    state.dolceLatte.price += 350;
+  },
+  decrementDolceLattePrice(state) {
+    state.dolceLatte.price -= 350;
+  },
 };
 const actions = {};
 const getters = {};

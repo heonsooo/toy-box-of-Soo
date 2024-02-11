@@ -20,8 +20,20 @@ export default {
     // index.js의 state
     ...mapState(["COMMON_COFFEE"]),
 
-    // module_americano.js의 state
+    // module_americano.js의 state 불러오는 3가지 방법
     ...americanoHelper.mapState(["icedAmericano"]),
+    // ...mapState("module_americano", ["icedAmericano"]),
+    // ...createNamespacedHelpers("module_americano").mapState(["icedAmericano"]),
+
+    // ...americanoHelper.mapState({
+    //   icedAmericanoNaming: (state) => state.icedAmericano,
+    // }),
+    // ...createNamespacedHelpers("module_americano").mapState({
+    //   icedAmericanoNaming: (state) => state.icedAmericano,
+    // }),
+    // ...mapState("module_americano", {
+    //   icedAmericanoNaming: (state) => state.icedAmericano,
+    // }),
 
     // index.js의 getters
     ...mapGetters(["COMMON_totalCoffeeCount", "COMMON_totalCoffeePrice"]),
@@ -32,10 +44,19 @@ export default {
       "COMMON_decrementCoffeeCount",
     ]),
 
-    ...createNamespacedHelpers("module_americano").mapMutations([
+    // module_americano.js의 mutations 불러오는 3가지 방법
+    ...americanoHelper.mapMutations([
       "incrementIcedAmericanoPrice",
       "decrementIcedAmericanoPrice",
     ]),
+    // ...createNamespacedHelpers("module_americano").mapMutations([
+    //   "incrementIcedAmericanoPrice",
+    //   "decrementIcedAmericanoPrice",
+    // ]),
+    // ...mapMutations("module_americano", [
+    //   "incrementIcedAmericanoPrice",
+    //   "decrementIcedAmericanoPrice",
+    // ]),
 
     onClickAddNum() {
       this.instanceDataOfPageA++;
@@ -60,12 +81,23 @@ export default {
           {{ instanceDataOfPageA }}
         </li>
       </ul>
+      <button class="btn" type="button" @click="onClickAddNum()">증가</button>
+      <button class="btn" type="button" @click="onClickMinusNum()">감소</button>
     </div>
     <div label="vuex-data">
       <h4>page A Vuex state (americano.js)</h4>
       <ul>
-        <li>{{ icedAmericano.name }} 가격 : {{ icedAmericano.price }}</li>
+        <li>
+          {{ icedAmericano.name }} 가격 :
+          {{ icedAmericano.price }}
+        </li>
       </ul>
+      <button class="btn" type="button" @click="incrementIcedAmericanoPrice()">
+        증액
+      </button>
+      <button class="btn" type="button" @click="decrementIcedAmericanoPrice()">
+        감액
+      </button>
     </div>
     <div label="vuex-data-advance">
       <h4>page A, Page B Vuex 공통 state (index.js)</h4>
@@ -75,6 +107,12 @@ export default {
       <ul>
         <li>총 {{ COMMON_totalCoffeeCount }}개</li>
       </ul>
+      <button class="btn" type="button" @click="COMMON_incrementCoffeeCount(0)">
+        아아추가
+      </button>
+      <button class="btn" type="button" @click="COMMON_decrementCoffeeCount(0)">
+        아아감소
+      </button>
     </div>
   </div>
 </template>

@@ -6,6 +6,12 @@ const state = {
   },
 };
 const mutations = {
+  incrementIcedAmericanoPrice(state) {
+    state.icedAmericano.price += 100;
+  },
+  decrementIcedAmericanoPrice(state) {
+    state.icedAmericano.price -= 100;
+  },
 };
 const actions = {};
 const getters = {};

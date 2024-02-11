@@ -25,6 +25,23 @@ export default {
     // index.js의 getters
     ...mapGetters(["COMMON_totalCoffeeCount", "COMMON_totalCoffeePrice"]),
   },
+  methods: {
+    ...mapMutations([
+      "COMMON_incrementCoffeeCount",
+      "COMMON_decrementCoffeeCount",
+    ]),
+
+    ...dolceHelper.mapMutations([
+      "incrementDolceLattePrice",
+      "decrementDolceLattePrice",
+    ]),
+    onClickAddNum() {
+      this.instanceDataOfPageB++;
+    },
+    onClickMinusNum() {
+      this.instanceDataOfPageB--;
+    },
+  },
 };
 </script>
 
@@ -41,12 +58,20 @@ export default {
           {{ instanceDataOfPageB }}
         </li>
       </ul>
+      <button class="btn" type="button" @click="onClickAddNum()">증가</button>
+      <button class="btn" type="button" @click="onClickMinusNum()">감소</button>
     </div>
     <div label="vuex-data">
       <h4>page B Vuex state (dolce.js)</h4>
       <ul>
         <li>{{ dolceLatte.name }} 가격: {{ dolceLatte.price }}</li>
       </ul>
+      <button class="btn" type="button" @click="incrementDolceLattePrice()">
+        증액
+      </button>
+      <button class="btn" type="button" @click="decrementDolceLattePrice()">
+        감액
+      </button>
     </div>
     <div label="vuex-data-advance">
       <h4>page A, Page B Vuex 공통 state (index.js)</h4>
@@ -56,6 +81,12 @@ export default {
       <ul>
         <li>총 {{ COMMON_totalCoffeeCount }}개</li>
       </ul>
+      <button class="btn" type="button" @click="COMMON_incrementCoffeeCount(1)">
+        돌체라떼 추가
+      </button>
+      <button class="btn" type="button" @click="COMMON_decrementCoffeeCount(1)">
+        돌체라떼 감소
+      </button>
     </div>
   </div>
 </template>
