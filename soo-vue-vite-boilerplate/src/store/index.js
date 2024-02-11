@@ -18,7 +18,13 @@ export default createStore({
       },
     ],
   },
-  getters: {},
+  getters: {
+    COMMON_totalCoffeeCount(state) {
+      return state.COMMON_COFFEE.reduce((acc, cur) => {
+        return acc + cur.count;
+      }, 0);
+    },
+  },
   mutations: {
     COMMON_incrementCoffeeCount(state, index) {
       state.COMMON_COFFEE[index].count++;
@@ -33,20 +39,3 @@ export default createStore({
     module_dolce,
   },
 });
-
-// import { createStore } from "vuex";
-
-// const store = createStore({
-//   state: {
-//     // Define your state properties here
-//   },
-//   mutations: {
-//     // Define your mutations here
-//   },
-//   actions: {
-//     // Define your actions here
-//   },
-//   getters: {
-//     // Define your getters here
-//   },
-// });
