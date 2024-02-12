@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     // module_dolce.js의 state
-    ...dolceHelper.mapState(["dolceLatte"]),
+    ...dolceHelper.mapState(["dolceLatte", "dolceLatteBarista"]),
 
     // index.js의 state
     ...mapState(["COMMON_COFFEE"]),
@@ -35,11 +35,18 @@ export default {
       "incrementDolceLattePrice",
       "decrementDolceLattePrice",
     ]),
+
+    ...dolceHelper.mapActions(["getDolceLatteBaristar"]),
+
     onClickAddNum() {
       this.instanceDataOfPageB++;
     },
     onClickMinusNum() {
       this.instanceDataOfPageB--;
+    },
+    onClickGetBaristar() {
+      let baristarId = Math.floor(Math.random() * 10 + 1);
+      this.getDolceLatteBaristar(baristarId);
     },
   },
 };
@@ -88,6 +95,24 @@ export default {
         돌체라떼 감소
       </button>
     </div>
+    <div class="vuex-action">
+      <h4>page B 돌체라떼 바리스타 호출 (Vuex actions 통신) (dolce.js)</h4>
+      <template v-if="dolceLatteBarista?.avatar">
+        <ul>
+          <span>
+            <img :src="dolceLatteBarista?.avatar" alt="avatar" />
+          </span>
+          <li class="avatar-desc">
+            name : {{ dolceLatteBarista?.first_name }}
+            {{ dolceLatteBarista?.last_name }}
+          </li>
+          <li>email : {{ dolceLatteBarista?.email }}</li>
+        </ul></template
+      >
+      <button class="btn" type="button" @click="onClickGetBaristar()">
+        바리스타 호출
+      </button>
+    </div>
   </div>
 </template>
 
@@ -106,6 +131,19 @@ export default {
 .desc {
   color: grey;
   font-size: 9pt;
+}
+.vuex-action {
+  margin-top: 30px;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.avatar-desc {
+  font-size: 14pt;
+  font-weight: bold;
 }
 
 .btn {

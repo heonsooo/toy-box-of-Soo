@@ -21,7 +21,7 @@ export default {
     ...mapState(["COMMON_COFFEE"]),
 
     // module_americano.js의 state 불러오는 3가지 방법
-    ...americanoHelper.mapState(["icedAmericano"]),
+    ...americanoHelper.mapState(["icedAmericano", "americanoBarista"]),
     // ...mapState("module_americano", ["icedAmericano"]),
     // ...createNamespacedHelpers("module_americano").mapState(["icedAmericano"]),
 
@@ -49,6 +49,7 @@ export default {
       "incrementIcedAmericanoPrice",
       "decrementIcedAmericanoPrice",
     ]),
+    ...americanoHelper.mapActions(["getAmericanoBaristar"]),
     // ...createNamespacedHelpers("module_americano").mapMutations([
     //   "incrementIcedAmericanoPrice",
     //   "decrementIcedAmericanoPrice",
@@ -65,6 +66,10 @@ export default {
       this.instanceDataOfPageA--;
     },
     onClickAddIcedAmericano() {},
+    onClickGetBaristar() {
+      let baristarId = Math.floor(Math.random() * 10 + 1);
+      this.getAmericanoBaristar(baristarId);
+    },
   },
 };
 </script>
@@ -114,6 +119,26 @@ export default {
         아아감소
       </button>
     </div>
+    <div class="vuex-action">
+      <h4>
+        page A 아메리카노 바리스타 호출 (Vuex actions 통신) (americano.js)
+      </h4>
+      <template v-if="americanoBarista?.avatar">
+        <ul>
+          <span>
+            <img :src="americanoBarista?.avatar" alt="avatar" />
+          </span>
+          <li class="avatar-desc">
+            name : {{ americanoBarista?.first_name }}
+            {{ americanoBarista?.last_name }}
+          </li>
+          <li>email : {{ americanoBarista?.email }}</li>
+        </ul></template
+      >
+      <button class="btn" type="button" @click="onClickGetBaristar()">
+        바리스타 호출
+      </button>
+    </div>
   </div>
 </template>
 
@@ -130,7 +155,19 @@ export default {
   color: grey;
   font-size: 9pt;
 }
-
+.vuex-action {
+  margin-top: 30px;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.avatar-desc {
+  font-size: 14pt;
+  font-weight: bold;
+}
 .img-box {
   background-image: url("../../assets/img/americano.jpg");
   background-size: cover;
