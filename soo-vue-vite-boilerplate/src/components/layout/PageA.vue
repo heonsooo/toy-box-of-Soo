@@ -121,7 +121,7 @@ export default {
     </div>
     <div class="vuex-action">
       <h4>
-        page A 아메리카노 바리스타 호출 (Vuex actions 통신) (americano.js)
+        page A 아메리카노 바리스타 조회 (Vuex actions 통신) (americano.js)
       </h4>
       <template v-if="americanoBarista?.avatar">
         <ul>
@@ -136,7 +136,7 @@ export default {
         </ul></template
       >
       <button class="btn" type="button" @click="onClickGetBaristar()">
-        바리스타 호출
+        바리스타 조회
       </button>
     </div>
   </div>

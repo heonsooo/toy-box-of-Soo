@@ -96,7 +96,7 @@ export default {
       </button>
     </div>
     <div class="vuex-action">
-      <h4>page B 돌체라떼 바리스타 호출 (Vuex actions 통신) (dolce.js)</h4>
+      <h4>page B 돌체라떼 바리스타 조회 (Vuex actions 통신) (dolce.js)</h4>
       <template v-if="dolceLatteBarista?.avatar">
         <ul>
           <span>
@@ -110,7 +110,7 @@ export default {
         </ul></template
       >
       <button class="btn" type="button" @click="onClickGetBaristar()">
-        바리스타 호출
+        바리스타 조회
       </button>
     </div>
   </div>
