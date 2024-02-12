@@ -1,4 +1,5 @@
 // store/latte/dolce.js
+import axios from "axios";
 const state = {
   dolceLatte: {
     name: "Hot DolceLatte",
