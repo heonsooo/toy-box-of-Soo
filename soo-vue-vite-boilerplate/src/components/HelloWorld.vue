@@ -1,41 +1,53 @@
-<script setup>
-import { ref } from "vue";
-
-defineProps({
-  msg: String,
-});
-
-const count = ref(0);
+<script>
+export default {
+  name: "HelloWorld",
+  props: {
+    msg: String,
+  },
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  methods: {
+    onClickMoveHome() {
+      this.$router.push("/");
+    },
+    onClickMovePageA() {
+      this.$router.push({ name: "A" });
+    },
+    onClickMovePageB() {
+      this.$router.push({ name: "B" });
+    },
+  },
+};
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <div class="main-border">
+    <h1>{{ msg }}</h1>
 
-  <div class="card">
-    <p>with. 아아덕후</p>
-    <button type="button" @click="count++">count is {{ count }}</button>
     <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
+      Main Page
+      <span>
+        <button type="button" @click="onClickMoveHome">Home</button>
+      </span>
+      <span>
+        <button type="button" @click="onClickMovePageA">pageA</button>
+      </span>
+      <span>
+        <button type="button" @click="onClickMovePageB">pageB</button>
+      </span>
     </p>
+    <router-view />
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
+<style>
+.main-border {
+  width: 80%;
+  border: 2px solid #000;
+  padding: 10px;
+  margin: 10px;
 }
 </style>
