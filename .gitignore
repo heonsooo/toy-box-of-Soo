@@ -11,3 +11,5 @@ soo-vue-vite-boilerplate/src/components/layout/PageB_1.vue
 soo-vue-vite-boilerplate/src/components/layout/PageB_origin.vue
 
 soo-vue-vite-boilerplate/src/components/layout/PageB_v1.vue
+
+*.md
