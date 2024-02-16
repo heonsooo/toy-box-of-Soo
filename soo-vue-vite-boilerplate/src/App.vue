@@ -1,17 +1,27 @@
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Header from "./components/Header.vue";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    Header,
   },
 };
 </script>
 
 <template>
   <div>
-    <HelloWorld msg="Vuex. wtih 아아덕후" />
+    <Header msg="Vuex." />
+    <main class="main-border">
+      <router-view />
+    </main>
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.main-border {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #000;
+}
+</style>
