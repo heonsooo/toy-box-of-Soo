@@ -53,25 +53,31 @@ export default {
 </script>
 
 <template>
-  <div class="pageB-border">
+  <section class="pageB-border">
     <h2>{{ pageTitle }}</h2>
-    <div class="img-box"></div>
-    <div label="instance-data">
+    <picture>
+      <img class="img-box" src="../../assets/img/latte.jpg" alt="A latte" />
+    </picture>
+    <article label="instance-data">
       <h4>page B 인스턴스 변수</h4>
-
       <ul>
         <li>
-          별점<span class="desc">(default :35)</span> :
-          {{ instanceDataOfPageB }}
+          별점
+          <span class="desc">(default :35): </span>
+          <strong>
+            {{ instanceDataOfPageB }}
+          </strong>
         </li>
       </ul>
       <button class="btn" type="button" @click="onClickAddNum()">증가</button>
       <button class="btn" type="button" @click="onClickMinusNum()">감소</button>
-    </div>
-    <div label="vuex-data">
+    </article>
+    <article label="vuex-data">
       <h4>page B Vuex state (dolce.js)</h4>
       <ul>
-        <li>{{ dolceLatte.name }} 가격: {{ dolceLatte.price }}</li>
+        <li>
+          {{ dolceLatte.name }} 가격: <strong>{{ dolceLatte.price }}</strong> 원
+        </li>
       </ul>
       <button class="btn" type="button" @click="incrementDolceLattePrice()">
         증액
@@ -79,14 +85,18 @@ export default {
       <button class="btn" type="button" @click="decrementDolceLattePrice()">
         감액
       </button>
-    </div>
-    <div label="vuex-data-advance">
+    </article>
+    <article label="vuex-data-advance">
       <h4>page A, Page B Vuex 공통 state (index.js)</h4>
       <ul v-for="(coffee, idx) in COMMON_COFFEE" :key="`coffee${idx}`">
         <li>{{ coffee.name }} : {{ coffee.count }}개</li>
       </ul>
       <ul>
-        <li>총 {{ COMMON_totalCoffeeCount }}개</li>
+        <li>
+          <p>
+            총 <strong>{{ COMMON_totalCoffeeCount }} </strong>개
+          </p>
+        </li>
       </ul>
       <button class="btn" type="button" @click="COMMON_incrementCoffeeCount(1)">
         돌체라떼 추가
@@ -94,26 +104,26 @@ export default {
       <button class="btn" type="button" @click="COMMON_decrementCoffeeCount(1)">
         돌체라떼 감소
       </button>
-    </div>
-    <div class="vuex-action">
+    </article>
+    <article class="vuex-action">
       <h4>page B 돌체라떼 바리스타 조회 (Vuex actions 통신) (dolce.js)</h4>
       <template v-if="dolceLatteBarista?.avatar">
         <ul>
-          <span>
+          <figure>
             <img :src="dolceLatteBarista?.avatar" alt="avatar" />
-          </span>
+          </figure>
           <li class="avatar-desc">
             name : {{ dolceLatteBarista?.first_name }}
             {{ dolceLatteBarista?.last_name }}
           </li>
           <li>email : {{ dolceLatteBarista?.email }}</li>
-        </ul></template
-      >
+        </ul>
+      </template>
       <button class="btn" type="button" @click="onClickGetBaristar()">
         바리스타 조회
       </button>
-    </div>
-  </div>
+    </article>
+  </section>
 </template>
 
 <style scoped>
@@ -123,7 +133,7 @@ export default {
   margin: 10px;
 }
 .img-box {
-  background-image: url("../../assets/img/latte.jpg");
+  /* background-image: url("../../assets/img/latte.jpg"); */
   background-size: cover;
   width: 400px;
   height: 400px;

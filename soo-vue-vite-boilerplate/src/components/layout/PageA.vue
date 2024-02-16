@@ -75,26 +75,33 @@ export default {
 </script>
 
 <template>
-  <div class="pageA-border">
+  <section class="pageA-border">
     <h2>{{ pageTitle }}</h2>
-    <div class="img-box"></div>
-    <div label="instance-data">
+    <picture>
+      <img
+        class="img-box"
+        src="../../assets/img/americano.jpg"
+        alt="americano"
+      />
+    </picture>
+    <article label="instance-data">
       <h4>page A 인스턴스 변수</h4>
       <ul>
         <li>
-          별점 <span class="desc">(default : 72)</span> :
-          {{ instanceDataOfPageA }}
+          별점
+          <span class="desc">(default : 72) :</span>
+          <strong>{{ instanceDataOfPageA }}</strong>
         </li>
       </ul>
       <button class="btn" type="button" @click="onClickAddNum()">증가</button>
       <button class="btn" type="button" @click="onClickMinusNum()">감소</button>
-    </div>
-    <div label="vuex-data">
+    </article>
+    <article label="vuex-data">
       <h4>page A Vuex state (americano.js)</h4>
       <ul>
         <li>
           {{ icedAmericano.name }} 가격 :
-          {{ icedAmericano.price }}
+          <strong>{{ icedAmericano.price }} </strong> 원
         </li>
       </ul>
       <button class="btn" type="button" @click="incrementIcedAmericanoPrice()">
@@ -103,14 +110,18 @@ export default {
       <button class="btn" type="button" @click="decrementIcedAmericanoPrice()">
         감액
       </button>
-    </div>
-    <div label="vuex-data-advance">
+    </article>
+    <article label="vuex-data-advance">
       <h4>page A, Page B Vuex 공통 state (index.js)</h4>
       <ul v-for="(coffee, idx) in COMMON_COFFEE" :key="`coffee${idx}`">
         <li>{{ coffee.name }} : {{ coffee.count }}개</li>
       </ul>
       <ul>
-        <li>총 {{ COMMON_totalCoffeeCount }}개</li>
+        <li>
+          <p>
+            총 <strong>{{ COMMON_totalCoffeeCount }} </strong>개
+          </p>
+        </li>
       </ul>
       <button class="btn" type="button" @click="COMMON_incrementCoffeeCount(0)">
         아아추가
@@ -118,28 +129,28 @@ export default {
       <button class="btn" type="button" @click="COMMON_decrementCoffeeCount(0)">
         아아감소
       </button>
-    </div>
-    <div class="vuex-action">
+    </article>
+    <article class="vuex-action">
       <h4>
         page A 아메리카노 바리스타 조회 (Vuex actions 통신) (americano.js)
       </h4>
       <template v-if="americanoBarista?.avatar">
         <ul>
-          <span>
+          <figure>
             <img :src="americanoBarista?.avatar" alt="avatar" />
-          </span>
+          </figure>
           <li class="avatar-desc">
             name : {{ americanoBarista?.first_name }}
             {{ americanoBarista?.last_name }}
           </li>
           <li>email : {{ americanoBarista?.email }}</li>
-        </ul></template
-      >
+        </ul>
+      </template>
       <button class="btn" type="button" @click="onClickGetBaristar()">
         바리스타 조회
       </button>
-    </div>
-  </div>
+    </article>
+  </section>
 </template>
 
 <style scoped>
@@ -169,7 +180,7 @@ export default {
   font-weight: bold;
 }
 .img-box {
-  background-image: url("../../assets/img/americano.jpg");
+  /* background-image: url("../../assets/img/americano.jpg"); */
   background-size: cover;
   width: 400px;
   height: 400px;
