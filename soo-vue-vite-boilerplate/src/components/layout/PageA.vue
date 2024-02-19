@@ -101,7 +101,7 @@ export default {
       <ul>
         <li>
           {{ icedAmericano.name }} 가격 :
-          <strong>{{ icedAmericano.price }} </strong> 원
+          <strong>{{ mixinComma(icedAmericano.price) }} </strong> 원
         </li>
       </ul>
       <button class="btn" type="button" @click="incrementIcedAmericanoPrice()">

@@ -76,7 +76,8 @@ export default {
       <h4>page B Vuex state (dolce.js)</h4>
       <ul>
         <li>
-          {{ dolceLatte.name }} 가격: <strong>{{ dolceLatte.price }}</strong> 원
+          {{ dolceLatte.name }} 가격:
+          <strong>{{ mixinComma(dolceLatte.price) }}</strong> 원
         </li>
       </ul>
       <button class="btn" type="button" @click="incrementDolceLattePrice()">
