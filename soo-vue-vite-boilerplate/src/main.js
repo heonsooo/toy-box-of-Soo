@@ -3,4 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-createApp(App).use(store).use(router).mount("#app");
+// mixin
+import { mixinFormattingNumber } from "./utils/mixin";
+
+createApp(App)
+  .mixin(mixinFormattingNumber)
+  .use(store)
+  .use(router)
+  .mount("#app");
