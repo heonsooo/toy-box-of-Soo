@@ -8,6 +8,7 @@ function AppProfile() {
         imgUrl="https://plus.unsplash.com/premium_photo-1665952050053-31ac47c6ff4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y3V0ZXxlbnwwfHwwfHx8MA%3D%3D"
         name="Kevin"
         job="front-end Developer"
+        isNew={true}
       />
       <Profile
         imgUrl="https://images.unsplash.com/photo-1497752531616-c3afd9760a11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y3V0ZXxlbnwwfHwwfHx8MA%3D%3D"
