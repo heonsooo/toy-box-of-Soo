@@ -9,27 +9,22 @@
   box-shadow: 9px 9px 22px 0px rgba(119, 158, 119, 0.75);
   -webkit-box-shadow: 9px 9px 22px 0px rgba(119, 158, 119, 0.75);
   -moz-box-shadow: 9px 9px 22px 0px rgba(119, 158, 119, 0.75);
-
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 3px #ccc;
-  width: 80%;
-  margin: 20px auto;
-  text-align: center; */
 }
 
-.profile-img {
+.avatar {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  border-radius: 20px;
+}
+
+.avatar-img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   margin-bottom: 20px;
 }
+
 
 .new {
   position: absolute;
@@ -41,16 +36,4 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-}
-
-.new-employee {
-  margin-right: 20px;
-  padding: 5px;
-  border: 0.5px solid #ccc;
-  border-radius: 1px;
-  box-shadow: 0 2px 3px #ccc;
-  width: 80%;
-  margin: 20px auto;
-  text-align: center;
-  background-color: aquamarine;
 }
