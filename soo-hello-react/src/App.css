@@ -1,9 +1,14 @@
+.main {
+  background-color: black;
+  color: white;
+}
+
 .profile {
   position: relative;
   width: 400px;
   text-align: center;
   padding: 1rem;
-  background-color: #ebebeb;
+  background-color: #538067;
   border-radius: 20px;
   margin: 20px auto;
   box-shadow: 9px 9px 22px 0px rgba(119, 158, 119, 0.75);
