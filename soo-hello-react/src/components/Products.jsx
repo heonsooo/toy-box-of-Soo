@@ -4,11 +4,16 @@ import { useEffect, useState } from "react";
 export default function Products() {
   const [count, setCount] = useState(0);
   const [product, setProduct] = useState([]);
+  const [saleSttus, setSaleSttus] = useState(false);
   const onClickAddCount = () => {
     setCount((prev) => prev + 1);
   };
+  const onChangeSaleSttus = () => {
+    const tmpSttus = saleSttus ? false : true;
+    setSaleSttus(tmpSttus);
+  };
   useEffect(() => {
-    fetch("data/products.json")
+    fetch(`data/${saleSttus ? "sale-" : ""}products.json`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -19,11 +24,18 @@ export default function Products() {
       // setProduct([]);
       console.log("unmounted~~~~");
     };
-  }, []);
+  }, [saleSttus]);
 
   return (
     <div>
-      Products
+      <input
+        id="checkbox"
+        type="checkbox"
+        checked={saleSttus}
+        onChange={onChangeSaleSttus}
+      />
+      <label htmlFor="checkbox">세일 여부</label>
+      <h3>{saleSttus ? "Discount" : ""} Products</h3>
       <ul>
         {product.map((e) => {
           return (
@@ -36,9 +48,9 @@ export default function Products() {
           );
         })}
       </ul>
-      <button type="button" onClick={onClickAddCount}>
+      {/* <button type="button" onClick={onClickAddCount}>
         {count}
-      </button>
+      </button> */}
     </div>
   );
 }
